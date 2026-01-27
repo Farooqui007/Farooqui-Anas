@@ -26,7 +26,7 @@ I enjoy learning new technologies and improving my problem-solving skills throug
 
 ## 📬 Contact
 - **Email:** farooquianasa007@gmail.com  
-- **GitHub:** https://github.com/Farooquii007
+- **Linkedin:** [https://github.com/Farooquii007](https://www.linkedin.com/in/anas-farooqui-959426255/)
 
 ## 📌 Hosting
 This portfolio is hosted using **GitHub Pages** and is live permanently.
