@@ -585,9 +585,16 @@ section,
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+@media (max-width: 768px) {
+  #hero {
+    min-height: 100svh; /* fixes mobile browser height bug */
+    background-position: center top;
+  }
+}
+
 .hero {
   position: relative;
-  min-height: calc(100vh - 92px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1262,3 +1269,12 @@ section,
   transform: translateX(-50%) translateY(0);
 }
 
+@media (max-width: 768px) {
+  #hero {
+    min-height: 100svh; /* fixes mobile browser height bug */
+  }
+
+  .hero-bg {
+    background-position: center top; /* prevents side cropping */
+  }
+}
