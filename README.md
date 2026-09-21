@@ -7,26 +7,25 @@ This site showcases my profile, skills, projects, and contact information in a c
 👉 [https://farooquii007.github.io/Farooqui-Anas/](https://farooqui007.github.io/Farooqui-Anas/)
 
 ## 👨‍💻 About Me
-I am **Farooqui Anas**, an entry-level **Full Stack Developer (SQL focused)** with a strong interest in building clean, responsive, and user-friendly web applications.  
-I enjoy learning new technologies and improving my problem-solving skills through hands-on projects.
+I am **Farooqui Anas**, a **Full Stack Developer** focused on Java, Spring Boot, Angular, PostgreSQL, REST APIs, and applied AI/ML. I enjoy building maintainable applications and improving my problem-solving skills through hands-on projects.
 
 ## 🛠️ Tech Stack
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-- **Responsive Web Design**
-- **Git & GitHub**
+- **Java, Spring Boot, Spring Data JPA**
+- **Angular, JavaScript, HTML5, CSS3**
+- **PostgreSQL, MySQL, REST APIs**
+- **Python, TensorFlow, OpenCV**
+- **Git, GitHub, Maven, Swagger/OpenAPI, Postman**
 
 ## 🚀 Features
 - Fully responsive portfolio layout
 - Clean and modern UI
-- About, Skills, and Contact sections
+- About, Resume, Experience, Projects, Skills, and Contact sections
 - Hosted using **GitHub Pages**
 - Free & permanent hosting
 
 ## 📬 Contact
-- **Email:** farooquianasa007@gmail.com  
-- **Linkedin:** [https://github.com/Farooquii007](https://www.linkedin.com/in/anas-farooqui-959426255/)
+- **Email:** farooquianas007@gmail.com
+- **LinkedIn:** [https://www.linkedin.com/in/anas-farooqui-959426255/](https://www.linkedin.com/in/anas-farooqui-959426255/)
 
 ## 📌 Hosting
 This portfolio is hosted using **GitHub Pages** and is live permanently.
