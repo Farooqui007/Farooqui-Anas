@@ -187,9 +187,62 @@
   }
 
   /**
-   * Initiate Pure Counter
+   * Reveal the experience timeline once when it enters the viewport.
    */
-  new PureCounter();
+  const experienceTimeline = document.querySelector('.experience-timeline');
+  if (experienceTimeline) {
+    const revealExperience = () => experienceTimeline.classList.add('is-experience-visible');
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealExperience();
+    } else {
+      const experienceObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        revealExperience();
+        observer.disconnect();
+      }, { threshold: 0.2 });
+      experienceObserver.observe(experienceTimeline);
+    }
+  }
+
+  /**
+   * Animate statistics once when the stats section enters the viewport.
+   */
+  const statsSection = document.querySelector('#stats');
+  const statCounters = document.querySelectorAll('#stats .purecounter');
+
+  function animateStats() {
+    statCounters.forEach((counter) => {
+      const endValue = Number(counter.dataset.purecounterEnd || 0);
+      const duration = Math.min(Number(counter.dataset.purecounterDuration || 1) * 1000, 900);
+
+      if (reducedMotion) {
+        counter.textContent = endValue;
+        return;
+      }
+
+      const startTime = performance.now();
+      const updateCounter = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.floor(easedProgress * endValue);
+        if (progress < 1) window.requestAnimationFrame(updateCounter);
+      };
+      window.requestAnimationFrame(updateCounter);
+    });
+  }
+
+  if (statsSection && statCounters.length) {
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      animateStats();
+    } else {
+      const statsObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        animateStats();
+        observer.disconnect();
+      }, { threshold: 0.25 });
+      statsObserver.observe(statsSection);
+    }
+  }
 
   /**
    * Initiate glightbox

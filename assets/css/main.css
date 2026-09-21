@@ -869,6 +869,96 @@ section,
   border: 2px solid var(--accent-color);
 }
 
+.resume .experience-timeline {
+  position: relative;
+  margin-bottom: 4px;
+  padding-left: 20px;
+}
+
+.resume .experience-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 20px;
+  left: 0;
+  width: 2px;
+  background: var(--accent-color);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 850ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.resume .experience-timeline.is-experience-visible::before {
+  transform: scaleY(1);
+}
+
+.resume .experience-timeline .experience-entry {
+  border-left: 0;
+  padding-left: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 650ms ease-out 180ms, transform 650ms ease-out 180ms;
+}
+
+.resume .experience-timeline .experience-entry::before {
+  left: -27px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 350ms ease-out 180ms, transform 350ms ease-out 180ms;
+}
+
+.resume .experience-timeline.is-experience-visible .experience-entry {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.resume .experience-timeline.is-experience-visible .experience-entry::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.resume .experience-entry-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.resume .experience-entry-header h5 {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.resume .experience-company {
+  margin: 0 0 8px;
+}
+
+.resume .experience-technologies {
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+@media (max-width: 575px) {
+  .resume .experience-entry-header {
+    display: block;
+  }
+
+  .resume .experience-entry-header h5 {
+    margin-top: 8px;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume .experience-timeline::before,
+  .resume .experience-timeline .experience-entry,
+  .resume .experience-timeline .experience-entry::before {
+    transition: none;
+  }
+}
+
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
@@ -971,6 +1061,10 @@ section,
   font-size: 16px;
   font-weight: 700;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.stats .purecounter {
+  min-width: 1ch;
 }
 
 /*--------------------------------------------------------------
