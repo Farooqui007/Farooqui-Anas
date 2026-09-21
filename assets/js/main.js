@@ -103,6 +103,50 @@
   window.addEventListener('load', aosInit);
 
   /**
+   * Reveal content blocks once as they enter the viewport.
+   */
+  function initScrollReveal() {
+    const revealSelectors = [
+      'main > section:not(#hero) .about-me',
+      'main > section:not(#hero) .skills-content',
+      'main > section:not(#hero) .resume-item',
+      'main > section:not(#hero) .service-item',
+      'main > section:not(#hero) .stats-item',
+      'main > section:not(#hero) .info-item'
+    ];
+    const revealTargets = document.querySelectorAll(revealSelectors.join(', '));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    revealTargets.forEach((target) => {
+      target.classList.add('scroll-reveal');
+
+      const parent = target.parentElement;
+      const siblings = parent ? Array.from(parent.children).filter((child) => child.matches('.scroll-reveal')) : [];
+      const siblingIndex = siblings.indexOf(target);
+      target.style.setProperty('--scroll-reveal-delay', `${Math.max(siblingIndex, 0) * 70}ms`);
+    });
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealTargets.forEach((target) => target.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        revealObserver.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealTargets.forEach((target) => observer.observe(target));
+  }
+  window.addEventListener('load', initScrollReveal);
+
+  /**
    * Init typed.js
    */
   const selectTyped = document.querySelector('.typed');
