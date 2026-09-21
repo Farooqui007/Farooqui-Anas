@@ -486,6 +486,38 @@ h6 {
   transition: all 0.4s;
 }
 
+.scroll-progress-ring {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.scroll-progress-ring circle {
+  fill: none;
+  stroke-width: 3;
+}
+
+.scroll-progress-track {
+  stroke: color-mix(in srgb, var(--contrast-color), transparent 70%);
+}
+
+.scroll-progress-value {
+  stroke: var(--contrast-color);
+  stroke-linecap: round;
+  stroke-dasharray: 125.66;
+  stroke-dashoffset: 125.66;
+  transition: stroke-dashoffset 100ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-value {
+    transition: none;
+  }
+}
+
 .scroll-top i {
   font-size: 24px;
   color: var(--contrast-color);

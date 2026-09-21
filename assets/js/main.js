@@ -71,20 +71,37 @@
   /**
    * Scroll top button
    */
-  let scrollTop = document.querySelector('.scroll-top');
+  const scrollTop = document.querySelector('.scroll-top');
+  const scrollProgress = document.querySelector('.scroll-progress-value');
+  const scrollCircumference = 125.66;
+  let progressFrame;
 
   function toggleScrollTop() {
     if (scrollTop) {
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
+
+    if (scrollProgress && !progressFrame) {
+      progressFrame = window.requestAnimationFrame(() => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const distanceFromBottom = scrollHeight - window.scrollY;
+        const scrollRatio = scrollHeight > 0
+          ? (distanceFromBottom <= 2 ? 1 : Math.min(window.scrollY / scrollHeight, 1))
+          : 0;
+        scrollProgress.style.strokeDashoffset = `${scrollCircumference * (1 - scrollRatio)}`;
+        progressFrame = null;
+      });
+    }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
