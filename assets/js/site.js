@@ -6,7 +6,10 @@
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const navMenu = document.querySelector('#navmenu');
   const navLinks = [...document.querySelectorAll('.navmenu a[href^="#"]')];
+  const scrollProgress = document.querySelector('.scroll-progress-value');
+  const scrollCircumference = 2 * Math.PI * 20;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let scrollProgressFrame = null;
 
   const toggleMobileNav = () => {
     body.classList.toggle('mobile-nav-active');
@@ -26,6 +29,20 @@
       if (section && position >= section.offsetTop) activeLink = link;
     });
     navLinks.forEach((link) => link.classList.toggle('active', link === activeLink));
+  };
+
+  const updateScrollProgress = () => {
+    if (!scrollProgress || scrollProgressFrame !== null) return;
+    scrollProgressFrame = requestAnimationFrame(() => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollRatio = scrollableHeight > 0
+        ? Math.min(Math.max(scrollTop / scrollableHeight, 0), 1)
+        : 0;
+      scrollProgress.style.strokeDasharray = `${scrollCircumference}`;
+      scrollProgress.style.strokeDashoffset = `${scrollCircumference * (1 - scrollRatio)}`;
+      scrollProgressFrame = null;
+    });
   };
 
   const animateStats = () => {
@@ -91,11 +108,13 @@
     body.classList.toggle('scrolled', window.scrollY > 100);
     document.querySelector('.scroll-top')?.classList.toggle('active', window.scrollY > 100);
     updateActiveNavLink();
+    updateScrollProgress();
   });
   window.addEventListener('load', () => {
     document.querySelector('#preloader')?.remove();
     body.classList.toggle('scrolled', window.scrollY > 100);
     updateActiveNavLink();
+    updateScrollProgress();
     AOS.init({ duration: 600, easing: 'ease-in-out', once: true, mirror: false });
     revealOnScroll();
     const typedElement = document.querySelector('.typed');
