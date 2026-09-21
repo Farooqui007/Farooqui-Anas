@@ -26,13 +26,17 @@
    * Mobile nav toggle
    */
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+  const navMenu = document.querySelector('#navmenu');
 
   function mobileNavToogle() {
+    if (!mobileNavToggleBtn) return;
     document.querySelector('body').classList.toggle('mobile-nav-active');
     mobileNavToggleBtn.classList.toggle('bi-list');
     mobileNavToggleBtn.classList.toggle('bi-x');
   }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  }
 
   /**
    * Hide mobile nav on same-page/hash links
@@ -44,6 +48,18 @@
       }
     });
 
+  });
+
+  document.addEventListener('click', (event) => {
+    if (document.querySelector('.mobile-nav-active') && navMenu && !navMenu.contains(event.target)) {
+      mobileNavToogle();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.querySelector('.mobile-nav-active')) {
+      mobileNavToogle();
+    }
   });
 
   /**

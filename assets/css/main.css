@@ -274,24 +274,36 @@ h6 {
   .header {
     position: absolute;
     top: 12px;
-    width: calc(100% - 32px);
-    padding: 8px 12px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .scrolled .header {
-    padding: 6px 10px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
   }
 
   .mobile-nav-toggle {
     color: var(--nav-color);
     font-size: 28px;
     line-height: 0;
-    margin-right: 10px;
+    margin: 0;
     cursor: pointer;
     transition: color 0.3s;
   }
 
   .navmenu {
+    position: relative;
     padding: 0;
     z-index: 9997;
   }
@@ -300,13 +312,20 @@ h6 {
     display: none;
     list-style: none;
     position: absolute;
-    inset: 60px 20px 20px 20px;
+    top: calc(100% + 10px);
+    right: 0;
+    left: auto;
+    bottom: auto;
+    width: min(280px, calc(100vw - 32px));
+    max-height: calc(100vh - 100px);
     padding: 10px 0;
     margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
+    border-radius: 14px;
+    background-color: rgba(255, 251, 244, 0.96);
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -380,29 +399,31 @@ h6 {
   }
 
   .mobile-nav-active {
-    overflow: hidden;
+    overflow: visible;
   }
 
   .mobile-nav-active .mobile-nav-toggle {
     color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
-    margin-right: 0;
+    position: static;
+    font-size: 28px;
+    margin: 0;
     z-index: 9999;
   }
 
   .mobile-nav-active .navmenu {
-    position: fixed;
-    overflow: hidden;
-    inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
+    position: relative;
+    overflow: visible;
+    inset: auto;
+    background: transparent;
   }
 
   .mobile-nav-active .navmenu>ul {
     display: block;
+    position: fixed;
+    top: 64px;
+    right: 16px;
+    left: 16px;
+    width: auto;
   }
 }
 
