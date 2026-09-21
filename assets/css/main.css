@@ -1563,6 +1563,41 @@ section,
   transform: translateY(0);
 }
 
+.resume-access {
+  padding: 40px 24px;
+}
+
+.resume-access-icon {
+  color: var(--accent-color);
+  display: block;
+  font-size: 52px;
+  margin-bottom: 16px;
+}
+
+.resume-access h3 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.resume-access p {
+  margin: 0 auto 24px;
+  max-width: 620px;
+}
+
+.resume-access-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (max-width: 575px) {
+  .resume-access-actions .resume-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* VIEW RESUME BUTTON (About section) */
 .resume-btn-about {
   display: inline-flex;
