@@ -163,21 +163,28 @@
   }
 
   /**
-   * Animate the skills items on reveal
+   * Animate skill meters once when their cards enter the viewport.
    */
-  let skillsAnimation = document.querySelectorAll('.skills-animation');
-  skillsAnimation.forEach((item) => {
-    new Waypoint({
-      element: item,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = item.querySelectorAll('.progress .progress-bar');
-        progress.forEach(el => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%';
-        });
-      }
-    });
+  const skillCards = document.querySelectorAll('.skill-card');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  skillCards.forEach((card) => {
+    card.style.setProperty('--skill-level', `${card.dataset.skillLevel}%`);
   });
+
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    skillCards.forEach((card) => card.classList.add('is-skill-revealed'));
+  } else {
+    const skillObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-skill-revealed');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    skillCards.forEach((card) => skillObserver.observe(card));
+  }
 
   /**
    * Initiate Pure Counter
